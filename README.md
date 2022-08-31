@@ -1,0 +1,2 @@
+# grid-test-csv-json-convert
+ZIP EXTRACT>CSV TO JSON CONVERSION>REACT APP CONSUMTION
