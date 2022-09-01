@@ -15,13 +15,13 @@ ZIP EXTRACT>CSV TO JSON CONVERSION>REACT APP CONSUMTION
   - run **npm start** at both the location.
   - App will run in 3000 port
   
-  If Clonned
-    -- Open the project in VS Code
-    -- move to grid-test-csv-json-convert   / cd grid-test-csv-json-convert
-    -- move to feature branch by // git checkout init-server-client    , because project in feature branch
-     - Open two terminals
-      - In One terminal open backend, in other open frontend
-      - npm install at both the root where package.json resides
-      - run **npm start** at both the location.
-      - App will run in 3000 port
-    -- 
+- If Clonned
+  -- Open the project in VS Code
+  -- move to grid-test-csv-json-convert   / cd grid-test-csv-json-convert
+  -- move to feature branch by // git checkout init-server-client    , because project in feature branch
+  - Open two terminals
+  - In One terminal open backend, in other open frontend
+  - npm install at both the root where package.json resides
+  - run **npm start** at both the location.
+  - App will run in 3000 port
+   
