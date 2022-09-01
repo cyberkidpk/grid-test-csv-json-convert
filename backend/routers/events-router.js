@@ -1,6 +1,6 @@
 "use strict";
 var eventsRouter = require("express").Router();
-var eventsData = require("../data/events-data");
+//var eventsData = require("../data/events-data");
 var services = require("../services");
 var commonutils = require("../utils/common")
 var converter = require("csvtojson");
@@ -10,7 +10,7 @@ var _ = require("lodash");
 var request = require("request");
 
 var JSZip = require("jszip");
-var events = eventsData;
+//var events = eventsData;
 var id = 12;
 
 var store = {};
