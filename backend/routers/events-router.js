@@ -17,10 +17,9 @@ var store = {};
 
 const onError =() =>{
 
-  console.log("error go")
+  console.log("error")
 }
 const onComplete =(res)=>{
-  console.log(res);
   res.send(services.getJson())
 }
 //cm29AUG2022bhav.csv
@@ -41,16 +40,19 @@ const final = async function (body, res, csvFileName) {
 
 eventsRouter.get("/getdata", function (req, res) {
 
-console.log(req.params);
+ const {fileToSeek, portToSeek, urlToSeek, secure} = req.query
+  const proto = secure == 'yes' ? 'https':'http';
+  const finalPort = portToSeek ? `:${portToSeek}`: '';
+  const config = `${proto}://${urlToSeek}${finalPort}/${fileToSeek}`;
 
- const serviceRes = services.makeApiCall('cm29AUG2022bhav.csv.zip')
- console.log(serviceRes);
- const csvFileName = commonutils.getCSVFileName('cm29AUG2022bhav.csv.zip')
+ const serviceRes = services.makeApiCall(req.query)
+ console.log(config);
+ const csvFileName = commonutils.getCSVFileName(fileToSeek)
 
  request(
   {
     method: "GET",
-    url: "http://localhost:3000/cm29AUG2022bhav.csv.zip",
+    url: config,
     encoding: null, // <- this one is important !
   },
   function (error, response, body) {

@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 
 import { Box, DataTable, Text, Meter} from 'grommet';
 import { ColumnConfig } from '../interfaces/ColumnConfig'
-import { grommet } from "grommet/themes";
-// This story uses TypeScript
-const amountFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2,
-});
+
 
 interface RowType {
   SYMBOL: string,
@@ -16,6 +10,7 @@ SERIES: string,
 OPEN: string,
 HIGH: string,
 LOW: string,
+cent_column: string,
 CLOSE: string,
 LAST: string,
 PREVCLOSE: string,
@@ -26,9 +21,22 @@ TOTALTRADES: string,
 ISIN: string,
 field14: string
 }
+
+const formattedComponent = (obj: any) =>{
+  const intCentCol = Number(obj.cent_column);
+  if (intCentCol >= 0) {
+   return <Text style={{background:'green', color:'#efe', textAlign:'center'}}> {obj.cent_column}</Text>
+  } else {
+    return <Text style={{background:'red', color:'#efe', textAlign:'center'}}> {obj.cent_column}</Text>
+  }
+}
 const columns: ColumnConfig<RowType>[] = [
+
   {property: 'SYMBOL',
   header:"SYMBOL"
+},
+{property: 'TIMESTAMP',
+header:"TIMESTAMP"
 },
 {property: 'SERIES',
 header:"SERIES"
@@ -45,6 +53,13 @@ header:"LOW"
 {property: 'CLOSE',
 header:"CLOSE"
 },
+{property: 'cent_column',
+header:'% Change',
+render: (datum) => {
+  return formattedComponent(datum)
+}
+},
+
 {property: 'LAST',
 header:"LAST"
 },
@@ -58,17 +73,17 @@ header:"TOTTRDQTY"
 header:"TOTTRDVAL"
 },
 
-{property: 'TIMESTAMP',
-header:"TIMESTAMP"
-},
-{property:"TOTALTRADES",
-header: "TOTALTRADES"},
-{property:"ISIN",
-header: "ISIN"},
-{property:"field14",
-header: "field14"}
+
+// {property:"TOTALTRADES",
+// header: "TOTALTRADES"},
+// {property:"ISIN",
+// header: "ISIN"},
+// {property:"field14",
+// header: "field14"}
 ]
 
+
+//Data for testing purpose
 const DATA = [{"SYMBOL":"20MICRONS",
 "SERIES":"EQ",
 "OPEN":"101.1",
@@ -89,27 +104,19 @@ export const SortedDataTable = (props: { tblData: any }) => {
  
   const [sortData, setSort] = useState({
     property: 'SYMBOL',
-    direction: 'desc'
+    direction: 'asc'
   });
    return (
-    // Uncomment <Grommet> lines when using outside of storybook
-    // <Grommet theme={grommet}>
-    <Box align="center" pad="large">
-      
+    <Box align="center" pad="large" width="medium"> 
       <DataTable 
-        // columns={columns.map((c) => ({
-        //   ...c,
-        //   search: c.property === 'name' || c.property === 'location',
-        // }))}
         columns={columns}
         data={props.tblData}
-        //sort={sortData}
         onSort={setSort}
         resizeable
       />
 
     </Box>
-    // </Grommet>
+
   );
 };
 
